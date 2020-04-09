@@ -1,0 +1,17 @@
+### Attaches ebs volume to a container and mounts it
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <name of your application goes here>
+spec:
+  containers:
+  - image: <url for docker image>
+    name: app
+    volumeMounts:
+    - mountPath: /vol <this is the path where we'd mount volumes>
+      name: <name of your application goes here>
+  volumes:
+  - name: <name of ebs volume. This must be created before this job runs>
+    awsElasticBlockStore:
+      volumeID: <volume-id>
+      fsType: xfs <any filesystem types like ext4, ext3, etc.>
